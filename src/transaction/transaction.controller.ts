@@ -1,4 +1,3 @@
-import { Prisma } from '@prisma/client';
 import {
   Controller,
   Get,
@@ -9,9 +8,11 @@ import {
   Body,
   UsePipes,
   ValidationPipe,
+  ParseArrayPipe,
 } from '@nestjs/common';
 
 import { TransactionService } from './transaction.service';
+import { CreateTransactionDto } from './dto/create-transactions.dto';
 
 @Controller('transaction')
 export class TransactionController {
@@ -24,15 +25,13 @@ export class TransactionController {
   // }
 
   //Create transactions
-  @UsePipes(new ValidationPipe())
   @Post('create')
+  @UsePipes(new ValidationPipe())
   async create(
-    @Body()
-    transactions:
-      | Prisma.TransactionCreateManyInput
-      | Prisma.TransactionCreateManyInput[],
+    @Body(new ParseArrayPipe({ items: CreateTransactionDto }))
+    dtos: CreateTransactionDto[],
   ) {
-    return this.transactionService.create(transactions);
+    return this.transactionService.create(dtos);
   }
 
   //Update transaction
