@@ -2,7 +2,7 @@
   "name": "money-tracker-nest-js-server",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Andrei Dergavko",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
