@@ -1,28 +1,49 @@
-import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Param,
+  Body,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
+
+import { TransactionService } from './transaction.service';
 
 @Controller('transaction')
 export class TransactionController {
-  //Get transactions by user
-  @Get()
-  async getTransactions() {
-    return;
-  }
+  constructor(private readonly transactionService: TransactionService) {}
 
-  //Create transaction
+  //Get transactions by user
+  // @Get()
+  // async getTransactions() {
+  //   return;
+  // }
+
+  //Create transactions
+  @UsePipes(new ValidationPipe())
   @Post('create')
-  async create() {
-    return {};
+  async create(
+    @Body()
+    transactions:
+      | Prisma.TransactionCreateManyInput
+      | Prisma.TransactionCreateManyInput[],
+  ) {
+    return this.transactionService.create(transactions);
   }
 
   //Update transaction
-  @Put(':id')
-  async update(@Param('id') id: string) {
-    return;
-  }
+  // @Put(':id')
+  // async update(@Param('id') id: string) {
+  //   return;
+  // }
 
   //Delete transaction
-  @Delete(':id')
-  async delete(@Param('id') id: string) {
-    return;
-  }
+  // @Delete(':id')
+  // async delete(@Param('id') id: string) {
+  //   return;
+  // }
 }
