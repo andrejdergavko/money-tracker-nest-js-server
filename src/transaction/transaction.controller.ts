@@ -29,7 +29,6 @@ export class TransactionController {
 
   //Create transactions
   @Post('create')
-  @UsePipes(new ValidationPipe())
   async create(
     @Body(new ParseArrayPipe({ items: CreateTransactionDto }))
     dtos: CreateTransactionDto[],
