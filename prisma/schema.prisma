@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Transaction {
-  uuid           String    @id @default(uuid())
+  id             String    @id @default(uuid())
   userId         String
   user           User      @relation(fields: [userId], references: [id])
   date           String
@@ -17,16 +17,16 @@ model Transaction {
   amount         Float
   amountInUsd    Float
   bank           String
-  categoryUuid   String?
-  category       Category? @relation(fields: [categoryUuid], references: [uuid])
+  categoryid     String?
+  category       Category? @relation(fields: [categoryid], references: [id])
   originalCsvRow Json
 
-  @@index([categoryUuid])
+  @@index([categoryid])
   @@index([userId])
 }
 
 model Category {
-  uuid         String        @id @default(uuid())
+  id           String        @id @default(uuid())
   label        String        @unique
   color        String
   transactions Transaction[]
