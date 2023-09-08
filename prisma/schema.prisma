@@ -17,11 +17,11 @@ model Transaction {
   amount         Float
   amountInUsd    Float
   bank           String
-  categoryid     String?
-  category       Category? @relation(fields: [categoryid], references: [id])
+  categoryId     String?
+  category       Category? @relation(fields: [categoryId], references: [id])
   originalCsvRow Json
 
-  @@index([categoryid])
+  @@index([categoryId])
   @@index([userId])
 }
 
