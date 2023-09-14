@@ -5,6 +5,7 @@ COPY ./package.json ./
 COPY ./yarn.lock ./
 RUN yarn install
 
+
 COPY . .
 RUN npx prisma db push
 RUN npx prisma generate
