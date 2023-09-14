@@ -1,0 +1,28 @@
+version: '3'
+services:
+  money-tracker-server:
+    container_name: money-tracker-server
+    image: money-tracker-server:latest
+    restart: always
+    ports:
+      - 8888:80
+    environment:
+      - JWT_SECRET=clmhg09170000n4twvuvoi8wx
+      - DATABASE_URL=postgresql://andreidergavko:andreidergavko@postgres:5432/money-tracker-db?schema=public
+      - GOOGLE_CLIENT_ID=840023652398-pn00h2ros0g1n9klet93g97244t0apjo.apps.googleusercontent.com
+      - GOOGLE_CLIENT_SECRET=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
+      - GOOGLE_CALLBACK_URL=http://localhost:3000/api/auth/google/redirect
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: postgres
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: 'money-tracker-db'
+      POSTGRES_USER: 'andreidergavko'
+      POSTGRES_PASSWORD: 'andreidergavko'
+    volumes:
+      - ./postgres:/docker-entrypoint-initdb.d
+    ports:
+      - 5432:5432
