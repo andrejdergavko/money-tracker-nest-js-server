@@ -6,8 +6,6 @@ COPY ./yarn.lock ./
 RUN yarn install
 
 COPY . .
-RUN npx prisma db push
-RUN npx prisma generate
 
 ENV DATABASE_URL=postgresql://
 ENV JWT_SECRET=secret
@@ -15,6 +13,8 @@ ENV GOOGLE_CLIENT_ID=id
 ENV GOOGLE_CLIENT_SECRET=secret
 ENV GOOGLE_CALLBACK_URL=url
 
+RUN npx prisma db push
+RUN npx prisma generate
 
 RUN yarn build
 
