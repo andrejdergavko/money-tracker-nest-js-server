@@ -7,11 +7,11 @@ services:
     ports:
       - 8888:80
     environment:
-      - JWT_SECRET=clmhg09170000n4twvuvoi8wx
-      - DATABASE_URL=postgresql://andreidergavko:andreidergavko@postgres:5432/money-tracker-db?schema=public
-      - GOOGLE_CLIENT_ID=840023652398-pn00h2ros0g1n9klet93g97244t0apjo.apps.googleusercontent.com
-      - GOOGLE_CLIENT_SECRET=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
-      - GOOGLE_CALLBACK_URL=http://localhost:3000/api/auth/google/redirect
+      - JWT_SECRET=
+      - DATABASE_URL=
+      - GOOGLE_CLIENT_ID=
+      - GOOGLE_CLIENT_SECRET=
+      - GOOGLE_CALLBACK_URL=
     depends_on:
       - postgres
 
